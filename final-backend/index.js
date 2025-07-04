@@ -1,0 +1,12 @@
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+
+app.use(express.json())
+app.use(cors())
+
+
+app.listen(8080, function(){
+    console.log("Server started from 8080")
+})
