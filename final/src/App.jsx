@@ -17,6 +17,8 @@ import Chairs from './productpage/Chairs'
 import Mattress from './productpage/Mattress'
 import Sofa from './productpage/Sofa'
 import Kitchen from './productpage/Kitchen'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
 
 
 function App() {
@@ -26,6 +28,8 @@ function App() {
     <ProductProvider>
     <BrowserRouter>
     <Routes>
+      <Route path='/login' element={<Login/>} />      
+      <Route path='/signup' element={<Signup/>} />      
       <Route path='/' element={<Home/>} />
       <Route path='/Product' element={<Product/>} />
       <Route path='/Product/stools' element={<Stool/>} />
