@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-
-
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import stool from '../assets/Stool.jpg'
 import lamp from '../assets/lamp.jpg'
 import table from '../assets/table.jpg'
@@ -19,11 +15,25 @@ import mattress from '../assets/mattress.jpg'
 import Nav from './Nav';
 import Hero from './Hero';
 import About from './About';
+import { auth } from '../config/firebase/Config';
 
 
 
 
 const Product = () => {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+            auth.onAuthStateChanged(function (user) {
+            if (user) {
+              console.log("user logged in")
+            } else {
+              console.log("User logged out")
+              navigate('/')
+            }
+          })
+        }, [])
 
   return (
     <>
@@ -113,7 +123,7 @@ const Product = () => {
             </div>
 
             <div className=''>
-              <Link t0='/Product/chair'>
+              <Link to='/Product/chair'>
               <img src={chair} className="w-full h-auto shadow-md hover:shadow-2xl transform hover:scale-105 transition-transform duration-300 rounded-xl" />
               <div className="p-3 text-center">
                 <h2 className="text-lg font-semibold text-gray-800">Chairs</h2>

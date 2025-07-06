@@ -1,27 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { auth } from '../config/firebase/Config'
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
+import ProductContext from '../context/ProductContext'
 
 
 const Signup = () => {
 
     const [ user, setUser ] = useState("");
     const [ pass, setPass ] = useState("");
-    const [ name, setName] = useState("");
+    const { name, setName} = useContext(ProductContext);
 
     const navigate = useNavigate();
 
     const handleSignup = async () => {
-        const userdata = await createUserWithEmailAndPassword(auth, user, pass).then(()=>{
+        const userdata = await createUserWithEmailAndPassword(auth, user, pass, name).then(()=>{
         console.log("user Registered")
-        navigate("/login")
-        }).catch((error)=>{
-            console.log(error)
-            alert(error.message)
-            navigate("/login")
+        navigate("/")
         })
     }
+
+    useEffect(() => {
+        auth.onAuthStateChanged(function (user) {
+          if (user) {
+            console.log("user logged in")
+            navigate('/home')
+          } else {
+            console.log("User logged out")
+          }
+        })
+      }, [])
 
     return (
         <>

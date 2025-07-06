@@ -41,7 +41,7 @@ const Mirrors = () => {
                 
                 <button
                   onClick={() => handlewatch(prod)}
-                  className="absolute top-4 right-4 z-10 p-2 rounded-full text-red-500"
+                  className="absolute top-8 right-4 z-10 p-2 rounded-full text-red-500"
                 >
                   {inWatchlist? <FaHeart /> : <FaRegHeart/>}
                 </button>

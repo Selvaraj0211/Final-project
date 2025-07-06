@@ -5,10 +5,11 @@ const ProductContext = createContext();
 
 export const ProductProvider = ({ children }) => {
   const [Watchlist, setwatchlist] = useState([]);
+  const [name, setName] = useState("");
   const [Cart, SetCart] = useState([]);
   const [buying, setbuying] = useState([]);
   const [Search, setSearch] = useState([]);
-  const [Productsearch, setProductsearch] = useState([]);
+  const [Googleuser, setGoogleuser] = useState([]);
   const [categoryproduct, setcategoryproduct] = useState([]);
 
 
@@ -71,7 +72,7 @@ export const ProductProvider = ({ children }) => {
 
 
   return (
-    <ProductContext.Provider value={{ Watchlist, Cart, handlewatch, handlecart, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
+    <ProductContext.Provider value={{ Googleuser, setGoogleuser, name, setName, Watchlist, Cart, handlewatch, handlecart, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
       {children}
     </ProductContext.Provider>
   );

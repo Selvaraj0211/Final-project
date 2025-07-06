@@ -19,6 +19,7 @@ import Sofa from './productpage/Sofa'
 import Kitchen from './productpage/Kitchen'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Cart from './components/Cart'
 
 
 function App() {
@@ -28,9 +29,9 @@ function App() {
     <ProductProvider>
     <BrowserRouter>
     <Routes>
-      <Route path='/login' element={<Login/>} />      
+      <Route path='/' element={<Login/>} />      
       <Route path='/signup' element={<Signup/>} />      
-      <Route path='/' element={<Home/>} />
+      <Route path='/home' element={<Home/>} />
       <Route path='/Product' element={<Product/>} />
       <Route path='/Product/stools' element={<Stool/>} />
       <Route path='/Product/lamps' element={<Lamp/>} />
@@ -46,6 +47,7 @@ function App() {
       <Route path='/Product/kitchen' element={<Kitchen/>} />
       <Route path='/about' element={<About/>} />
       <Route path='/contact' element={<Contact/>} />
+      <Route path='/Cart' element={<Cart/>} />
     </Routes>    
     </BrowserRouter>
     </ProductProvider>
