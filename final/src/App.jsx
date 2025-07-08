@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import {BrowserRouter, Routes, Route} from'react-router-dom'
 import Home from './Pages/Home'
 import Product from './components/Product'
 import Stool from './productpage/Stools'
-import { ProductProvider } from './context/ProductContext'
+import ProductContext, { ProductProvider } from './context/ProductContext'
 import About from './components/About'
 import Contact from './components/Contact'
 import Lamp from './productpage/Lamp'
@@ -22,8 +22,12 @@ import Signup from './pages/Signup'
 import Cart from './components/Cart'
 
 
+
 function App() {
   
+   
+
+
 
   return (
     <ProductProvider>

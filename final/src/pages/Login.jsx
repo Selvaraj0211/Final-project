@@ -4,13 +4,14 @@ import { auth, provider } from '../config/firebase/Config'
 import { Link, useNavigate } from 'react-router-dom'
 import { FaGoogle } from 'react-icons/fa'
 import ProductContext from '../context/ProductContext'
+import axios from 'axios';
+
 
 const Login = () => {
 
-  const [User, setuser] = useState("");
   const [Pass, setpass] = useState("");
   const navigate = useNavigate();
-  const {Googleuser, setGoogleuser, name} = useContext(ProductContext)
+  const { Googleuser, User, setuser, setGoogleuser, name } = useContext(ProductContext)
 
   useEffect(() => {
     auth.onAuthStateChanged(function (user) {
@@ -32,17 +33,26 @@ const Login = () => {
       alert(err.message)
       console.log("login failed")
 
-
     })
+
+    axios.post('http://localhost:8080/login', {
+      user: User, pass:Pass
+
+    }).then(response => {
+        console.log(response.data);
+      }).catch(error => {
+        console.error(error);
+      });
+
 
   }
 
   const handlegoogleclick = async () => {
-    const {userid = null} = await signInWithPopup(auth, provider)
+    const { userid = null } = await signInWithPopup(auth, provider)
     console.log(userid)
     setGoogleuser(userid)
 
-    
+
   }
 
   return (
@@ -89,7 +99,7 @@ const Login = () => {
             </button>
 
             <button
-            onClick={handlegoogleclick}
+              onClick={handlegoogleclick}
               className="flex items-center justify-center gap-2 bg-white text-gray-700 px-4 py-2 w-full"
             >
               <FaGoogle className="w-5 h-5" />

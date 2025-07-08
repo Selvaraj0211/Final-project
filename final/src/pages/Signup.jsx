@@ -7,14 +7,14 @@ import ProductContext from '../context/ProductContext'
 
 const Signup = () => {
 
-    const [ user, setUser ] = useState("");
+    // const [User, setuser] = useState('')
     const [ pass, setPass ] = useState("");
-    const { name, setName} = useContext(ProductContext);
+    const { name, setName , User, setuser} = useContext(ProductContext);
 
     const navigate = useNavigate();
 
     const handleSignup = async () => {
-        const userdata = await createUserWithEmailAndPassword(auth, user, pass, name).then(()=>{
+        const userdata = await createUserWithEmailAndPassword(auth, User, pass, name).then(()=>{
         console.log("user Registered")
         navigate("/")
         })
@@ -54,7 +54,7 @@ const Signup = () => {
                             <input
                                 type="email"
                                 placeholder="Enter your Email"
-                                onChange={(e) => setUser(e.target.value)}
+                                onChange={(e) => setuser(e.target.value)}
                                 className="w-full mt-1 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-600"
                                 required
                             />

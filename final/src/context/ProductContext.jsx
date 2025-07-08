@@ -6,12 +6,29 @@ const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   const [Watchlist, setwatchlist] = useState([]);
   const [name, setName] = useState("");
+  const [User, setuser] = useState("");
   const [Cart, SetCart] = useState([]);
   const [buying, setbuying] = useState([]);
   const [Search, setSearch] = useState([]);
   const [Googleuser, setGoogleuser] = useState([]);
   const [categoryproduct, setcategoryproduct] = useState([]);
 
+
+
+  // useEffect(() => {
+  //   if (User) {
+  //     axios.get(`http://localhost:8080/cartget/${User._id}`)
+  //       .then(response => {
+  //         const savedCart = response.data.cart;
+  //         if (savedCart) {
+  //           SetCart(savedCart);
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error('Error loading cart:', error);
+  //       });
+  //   }
+  // }, [User]);
 
   // Search product by category
   useEffect(() => {
@@ -44,16 +61,41 @@ export const ProductProvider = ({ children }) => {
   // Add/remove from cart
   const handlecart = (prod) => {
     const index = Cart.findIndex((p) => p.id === prod.id);
-    if (index === -1) {
-      SetCart([...Cart, prod]);
-    } else {
-      SetCart([
-        ...Cart.slice(0, index),
-        ...Cart.slice(index + 1),
-      ]);
-    }
+    const updatedCart = index === -1
+      ? [...Cart, prod]
+      : [...Cart.slice(0, index), ...Cart.slice(index + 1)];
+
+    SetCart(updatedCart);
+
+    axios.post('http://localhost:8080/cartsave', {
+      cart: updatedCart,
+      
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+      
+
   };
-  console.log(Cart);
+  
+
+  useEffect(() => {
+    if (Cart && Cart.length > 0 && User) {
+      axios.post('http://localhost:8080/cartsave', {
+        cart: Cart,
+      })
+        .then(response => {
+          console.log('Cart saved:', response.data);
+        })
+        .catch(error => {
+          console.error('Error saving cart:', error);
+        });
+    }
+  }, [Cart]);
 
 
   // Proceed to buy
@@ -72,7 +114,7 @@ export const ProductProvider = ({ children }) => {
 
 
   return (
-    <ProductContext.Provider value={{ Googleuser, setGoogleuser, name, setName, Watchlist, Cart, handlewatch, handlecart, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
+    <ProductContext.Provider value={{ User, setuser, Googleuser, setGoogleuser, name, setName, Watchlist, Cart, handlewatch, handlecart, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
       {children}
     </ProductContext.Provider>
   );

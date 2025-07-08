@@ -27,9 +27,9 @@ const Product = () => {
   useEffect(() => {
             auth.onAuthStateChanged(function (user) {
             if (user) {
-              console.log("user logged in")
+              
             } else {
-              console.log("User logged out")
+              
               navigate('/')
             }
           })
