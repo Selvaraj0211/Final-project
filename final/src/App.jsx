@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import {BrowserRouter, Routes, Route} from'react-router-dom'
-import Home from './Pages/Home'
+import Home from './pages/Home'
 import Product from './components/Product'
 import Stool from './productpage/Stools'
 import ProductContext, { ProductProvider } from './context/ProductContext'
