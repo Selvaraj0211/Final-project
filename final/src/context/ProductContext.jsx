@@ -83,19 +83,6 @@ export const ProductProvider = ({ children }) => {
   };
   
 
-  useEffect(() => {
-    if (Cart && Cart.length > 0 && User) {
-      axios.post('http://localhost:8080/cartsave', {
-        cart: Cart,
-      })
-        .then(response => {
-          console.log('Cart saved:', response.data);
-        })
-        .catch(error => {
-          console.error('Error saving cart:', error);
-        });
-    }
-  }, [Cart]);
 
 
   // Proceed to buy

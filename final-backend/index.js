@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require("mongoose");
 const app = express();
+const nodemailer = require("nodemailer");
 
 app.use(cors());
 app.use(express.json());
@@ -27,7 +28,7 @@ app.post('/login', (req, res) => {
   res.send("Login received");
 });
 
-
+// save cart to db
 app.post('/cartsave', async (req, res) => {
   const { user, cart } = req.body;
 
@@ -41,9 +42,10 @@ app.post('/cartsave', async (req, res) => {
   }
 });
 
+// get cart from db
 
-app.get('/cartget', async (req, res) => {
-  const username = req.params.user;
+app.get('/cartget/', async (req, res) => {
+  // const username = req.params.user;
 
   try {
     const userCart = await CartData.findOne({ user });
@@ -53,9 +55,42 @@ app.get('/cartget', async (req, res) => {
       res.status(404).send("Cart not found");
     }
   } catch (err) {
-    res.status(500).send("Error getting cart");
+    res.status(500).send("Error get cart");
   }
 });
+
+
+// contact email send 
+app.post("/sendmail", (req, res) => {
+  const { name, cus, msg } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "selvarannav6231@gmail.com",
+      pass: "avlz dzcz hfmf oekv",
+    },
+  });
+
+  (async () => {
+    try {
+      const info = await transporter.sendMail({
+        from: cus,
+        to: "selvarannav6231@gmail.com",
+        subject: "customer"+ name,
+        text: msg
+      });
+
+      console.log("Message sent:");
+      res.send("Email sent successfully");
+    } catch (err) {
+      console.error("Mail error:");
+      res.status(500).send("Failed to send email");
+    }
+  })();
+});
+
+
 
 
 app.listen(8080, () => {

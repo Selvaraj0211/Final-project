@@ -10,6 +10,7 @@ import axios from 'axios';
 const Login = () => {
 
   const [Pass, setpass] = useState("");
+  const [showpass, setshowpass] = useState(false);
   const navigate = useNavigate();
   const { Googleuser, User, setuser, setGoogleuser, name } = useContext(ProductContext)
 
@@ -75,7 +76,7 @@ const Login = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700">Password</label>
               <input
-                type="password"
+                type={showpass ? "password" : "text"}
                 placeholder="Enter your Password"
                 onChange={(e) => setpass(e.target.value)}
                 className="mt-1 block w-full px-4 py-2 border rounded-md shadow-sm focus:ring-2 focus:ring-yellow-600 focus:outline-none"
@@ -83,7 +84,10 @@ const Login = () => {
             </div>
             <div className="flex items-center justify-between">
               <label className="flex items-center text-sm text-gray-700">
-                <input type="checkbox" className="mr-2" />
+                <input 
+                onClick={() => setshowpass(!showpass)}
+                type="checkbox" 
+                className="mr-2" />
                 Show Password
               </label>
               <span href="#" className="text-sm text-red-700 hover:underline">

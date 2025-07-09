@@ -13,14 +13,15 @@ const Home = () => {
 
   const navigate = useNavigate()
   const [cartItems, setCartItems] = useState([])
-  const { Cart, SetCart, User, Googleuser, name, Watchlist, } = useContext(ProductContext)
-
+  const { Cart, SetCart, Googleuser, name, Watchlist, } = useContext(ProductContext)
+  const [User, setUser] = useState(null);
 
   useEffect(() => {
 
     auth.onAuthStateChanged(function (user) {
       if (user) {
-        // console.log("user logged in")
+        setUser(user)
+        console.log("user logged in")
       } else {
         // console.log("User logged out")
         navigate('/')
@@ -28,38 +29,21 @@ const Home = () => {
     })
   }, [])
 
-//   useEffect(() => {
-//     if (Cart) {
-//       axios.post('http://localhost:8080/cartsave', {
-//         user: User,
-//         cart: Cart,
-//         googleUser: Googleuser,
-//         watchlist: Watchlist,
-//       })
-//         .then(response => {
-//           console.log('Cart saved:', response.data);
 
-//         })
-//         .catch(error => {
-//           console.error('Error saving cart:', error);
-//         });
-//     }
-//   }, [Cart]);
-
-//   useEffect(() => {
-//   if (User) {
-//     axios.get(`http://localhost:8080/cartget/${User._id}`)
-//       .then(response => {
-//         const savedCart = response.data.cart;
-//         if (savedCart) {
-//           SetCart(savedCart); 
-//         }
-//       })
-//       .catch(error => {
-//         console.error('Error loading cart:', error);
-//       });
-//   }
-// }, [User]);
+  useEffect(() => {
+    if (User) {
+      axios.get(`http://localhost:8080/cartget/${User.uid}`)
+        .then(response => {
+          const savedCart = response.data.cart;
+          if (savedCart) {
+            SetCart(savedCart);
+          }
+        })
+        .catch(error => {
+          console.error('Error loading cart:', error);
+        });
+    }
+  }, [User]);
 
   return (
     <>
