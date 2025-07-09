@@ -48,10 +48,10 @@ app.post('/cartremove', async (req, res) => {
   const { user, cart } = req.body;
 
   try {
-    const existing = await CartData.findOne({ user });
+    const existing = await CartData.deleteOne({ user });
     if (existing) {
       existing.cart = cart;
-      await existing.deleteOne();
+      await existing.save();
       res.send("Item removed from cart");
     } else {
       res.status(404).send("Cart not found");
