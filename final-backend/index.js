@@ -44,18 +44,21 @@ app.post('/cartsave', async (req, res) => {
 
 // get cart from db
 
-app.get('/cartget/', async (req, res) => {
-  // const username = req.params.user;
+app.post('/cartremove', async (req, res) => {
+  const { user, cart } = req.body;
 
   try {
-    const userCart = await CartData.findOne({ user });
-    if (userCart) {
-      res.json(userCart.cart);
+    const existing = await CartData.findOne({ user });
+    if (existing) {
+      existing.cart = cart;
+      await existing.save();
+      res.send("Item removed from cart");
     } else {
       res.status(404).send("Cart not found");
     }
-  } catch (err) {
-    res.status(500).send("Error get cart");
+  } catch (error) {
+    console.error("Error removing item:", error);
+    res.status(500).send("Server error");
   }
 });
 

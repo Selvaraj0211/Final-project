@@ -66,18 +66,31 @@ export const ProductProvider = ({ children }) => {
       : [...Cart.slice(0, index), ...Cart.slice(index + 1)];
 
     SetCart(updatedCart);
-
-    axios.post('http://localhost:8080/cartsave', {
+if (index === -1) {
+   
+    axios.post('https://final-project-47rc.onrender.com/cartsave', {
       cart: updatedCart,
-      
+      user: User, 
     })
       .then(response => {
-        console.log(response.data);
+        console.log("Cart saved:", response.data);
       })
       .catch(error => {
-        console.error(error);
+        console.error("Save error:", error);
       });
-
+  } else {
+    
+    axios.post('https://final-project-47rc.onrender.com/cartremove', {
+      cart: updatedCart,
+      user: User, 
+    })
+      .then(response => {
+        console.log("Cart updated after removal:", response.data);
+      })
+      .catch(error => {
+        console.error("Remove error:", error);
+      });
+    }
       
 
   };

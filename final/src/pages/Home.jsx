@@ -32,7 +32,7 @@ const Home = () => {
 
   useEffect(() => {
     if (User) {
-      axios.get(`http://localhost:8080/cartget/${User.uid}`)
+      axios.get(`https://final-project-47rc.onrender.com/cartget/${User.uid}`)
         .then(response => {
           const savedCart = response.data.cart;
           if (savedCart) {

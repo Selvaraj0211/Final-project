@@ -16,7 +16,7 @@ const handleclick = async (e)=>{
  e.preventDefault();
     setsts(true)
 
-    const response = await axios.post("http://localhost:8080/sendmail", { msg: msg, cus: cus, name: name })
+    const response = await axios.post("https://final-project-47rc.onrender.com/sendmail", { msg: msg, cus: cus, name: name })
       .then((data) => {
         if (data.status === 200) {
           alert("Email send successfully")
