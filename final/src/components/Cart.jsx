@@ -5,7 +5,7 @@ import { FaHeart, FaRegHeart , FaShoppingCart } from 'react-icons/fa';
 import Nav from './Nav';
 
 const Cart = () => {
-    const { Cart, Watchlist,handlewatch, handlecart, } = useContext(ProductContext);
+    const { Cart, Watchlist,handlewatch,handleremove, handlecart, } = useContext(ProductContext);
 
     return (
         <>
@@ -57,7 +57,7 @@ const Cart = () => {
                                   
                                   <div className="flex justify-between">
                                     <button
-                                      onClick={() => handlecart(item)}
+                                      onClick={() => incart ? handleremove(item) : handlecart(item)}
                                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition duration-200 ${
                                         incart
                                           ? 'bg-gray-600 text-white'
