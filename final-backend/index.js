@@ -49,7 +49,7 @@ app.post('/cartremove', async (req, res) => {
 
   try {
     const existing = await CartData.findOne({ user });
-    if (!existing) { 
+    if (existing) { 
       existing.cart = cart;
       await existing.save();
       res.send("Item removed from cart");

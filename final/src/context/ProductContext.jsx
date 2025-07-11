@@ -64,6 +64,9 @@ export const ProductProvider = ({ children }) => {
     const updatedCart = index === -1
       ? [...Cart, prod]
       : [...Cart.slice(0, index), ...Cart.slice(index + 1)];
+
+    SetCart(updatedCart);
+if (index === -1) {
    
     axios.post('https://final-project-47rc.onrender.com/cartsave', {
       cart: updatedCart,
@@ -71,28 +74,27 @@ export const ProductProvider = ({ children }) => {
     })
       .then(response => {
         console.log("Cart saved:", response.data);
-        SetCart(updatedCart);
       })
       .catch(error => {
         console.error("Save error:", error);
       });
-  }       
-
-  const handleremove = (prod)=>{
-    const updatedCart = Cart.filter((p) => p.id === prod.id);
-
+  } else {
+    
     axios.post('https://final-project-47rc.onrender.com/cartremove', {
       cart: updatedCart,
       user: User, 
     })
       .then(response => {
         console.log("Cart updated after removal:", response.data);
-        SetCart(updatedCart);
       })
       .catch(error => {
         console.error("Remove error:", error);
       });
-  }
+    }
+      
+
+  };
+  
 
 
 
@@ -112,7 +114,7 @@ export const ProductProvider = ({ children }) => {
 
 
   return (
-    <ProductContext.Provider value={{ User, setuser, Googleuser, setGoogleuser, name, setName, Watchlist, Cart, handlewatch, handlecart, handleremove, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
+    <ProductContext.Provider value={{ User, setuser, Googleuser, setGoogleuser, name, setName, Watchlist, Cart, handlewatch, handlecart, setSearch, productbuy, buying, categoryproduct, setcategoryproduct }}>
       {children}
     </ProductContext.Provider>
   );
