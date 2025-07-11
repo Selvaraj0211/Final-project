@@ -65,7 +65,7 @@ export const ProductProvider = ({ children }) => {
       ? [...Cart, prod]
       : [...Cart.slice(0, index), ...Cart.slice(index + 1)];
    
-    axios.post('http://localhost:8080/cartsave', {
+    axios.post('https://final-project-47rc.onrender.com/cartsave', {
       cart: updatedCart,
       user: User, 
     })
@@ -78,10 +78,10 @@ export const ProductProvider = ({ children }) => {
       });
   }       
 
-  const handleremove = ()=>{
-    const updatedCart = Cart.filter((p) => p.id !== prod.id);
+  const handleremove = (prod)=>{
+    const updatedCart = Cart.filter((p) => p.id === prod.id);
 
-    axios.post('http://localhost:8080/cartremove', {
+    axios.post('https://final-project-47rc.onrender.com/cartremove', {
       cart: updatedCart,
       user: User, 
     })
