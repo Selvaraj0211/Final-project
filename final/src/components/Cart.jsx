@@ -7,6 +7,10 @@ import Nav from './Nav';
 const Cart = () => {
     const { Cart, Watchlist,handlewatch, handlecart, } = useContext(ProductContext);
 
+   const handleremove = () =>{
+    
+   }
+
     return (
         <>
             <Nav />

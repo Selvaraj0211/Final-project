@@ -25,7 +25,7 @@ const Nav = () => {
   }
 
 const handleusername = ()=>{
-  console.log()
+  
 }
 
 
@@ -46,7 +46,7 @@ const handleusername = ()=>{
 
             {/* Options */}
             <div className="hidden md:flex items-center space-x-8">
-              <div className=" flex items-center bg-gray-100 rounded-full px-4 py-2 w-3xs">
+              {/* <div className=" flex items-center bg-gray-100 rounded-full px-4 py-2 w-3xs">
                 <FaSearch className="w-4 h-4 text-gray-500 mr-2" />
                 <input
                   onChange={(e) => setSearch(e.target.value)}
@@ -54,7 +54,7 @@ const handleusername = ()=>{
                   placeholder="Search furniture..."
                   className="bg-transparent outline-none w-full text-sm"
                 />
-              </div>
+              </div> */}
               <Link to='/home' className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Home</Link>
               <Link to='/Product' className="text-gray-700 hover:text-blue-600 transition-colors font-medium">Products</Link>
               <Link to='/about' className="text-gray-700 hover:text-blue-600 transition-colors font-medium">About</Link>
@@ -69,11 +69,11 @@ const handleusername = ()=>{
                   {Watchlist.length}
                 </span>
               </button>
-              <button 
+              {/* <button 
               onClick={handleusername}
               className="hidden md:block p-2 text-gray-700 hover:text-blue-600 transition-colors">
                 {name}{Googleuser} <FaUser className="w-5 h-5" />
-              </button>
+              </button> */}
 
               <Link to ='/Cart' className="relative p-2 text-gray-700 hover:text-blue-600 transition-colors">
                 <FaShoppingCart className="w-5 h-5" />

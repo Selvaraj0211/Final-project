@@ -30,20 +30,20 @@ const Home = () => {
   }, [])
 
 
-  useEffect(() => {
-    if (User) {
-      axios.get(`https://final-project-47rc.onrender.com/cartget/${User.uid}`)
-        .then(response => {
-          const savedCart = response.data.cart;
-          if (savedCart) {
-            SetCart(savedCart);
-          }
-        })
-        .catch(error => {
-          console.error('Error loading cart:', error);
-        });
-    }
-  }, [User]);
+  // useEffect(() => {
+  //   if (User) {
+  //     axios.get(`https://final-project-47rc.onrender.com/cartget/${User.uid}`)
+  //       .then(response => {
+  //         const savedCart = response.data.cart;
+  //         if (savedCart) {
+  //           SetCart(savedCart);
+  //         }
+  //       })
+  //       .catch(error => {
+  //         console.error('Error loading cart:', error);
+  //       });
+  //   }
+  // }, [User]);
 
   return (
     <>

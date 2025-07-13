@@ -1,5 +1,6 @@
 import React from 'react'
 import design1 from '../assets/design1.jpg'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -22,9 +23,10 @@ const Hero = () => {
               <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1.5 rounded-full text-lg font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
                 Shop Collection
               </button>
-              <button className="border-2 border-gray-300 text-gray-700 px-3 py-1.5 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300">
+              <Link className="border-2 border-gray-300 text-gray-700 px-3 py-1.5 rounded-full text-lg font-semibold hover:border-blue-600 hover:text-blue-600 transition-all duration-300"
+              to='/Product'>                
                 View Catalog
-              </button>
+              </Link>
             </div>
           </div>      
         </div>

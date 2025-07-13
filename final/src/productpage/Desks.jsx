@@ -9,6 +9,8 @@ const Desks = () => {
   
   const { Watchlist, Cart, handlewatch, handlecart, productbuy, buying, categoryproduct, setcategoryproduct } = useContext(ProductContext);
 
+    const [loading, setloading] = useState(true)
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -17,6 +19,8 @@ const Desks = () => {
         console.log(response.data.data);
       } catch (err) {
         console.log(err.message);
+      }finally {
+        setloading(false);
       }
     };
 
@@ -29,7 +33,11 @@ const Desks = () => {
       <div className="p-4 bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen mt-5">
         <h1 className="text-3xl font-bold text-center mb-8 text-gray-800 pt-8 mt-4">Our Products</h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {loading? (<div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50">
+          <div className="w-16 h-16 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+        </div>) : 
+        
+        (<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {categoryproduct.map((prod) => {
             const incart = Cart.some((p) => p.id === prod.id);
             const inWatchlist = Watchlist.some((p)=>p.id===prod.id);
@@ -83,7 +91,9 @@ const Desks = () => {
               </div>
             );
           })}
-        </div>
+        </div>)}
+
+        
       </div>
     </>
   );
