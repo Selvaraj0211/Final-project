@@ -82,7 +82,7 @@ const Signup = () => {
 
                     <p className="text-sm text-center text-gray-600 mt-4">
                         Already have an account?{" "}
-                        <Link to="/login" className="text-yellow-600 hover:underline">
+                        <Link to="/" className="text-yellow-600 hover:underline">
                             Log In
                         </Link>
                     </p>

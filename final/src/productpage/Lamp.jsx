@@ -7,7 +7,7 @@ import ProductContext from '../context/ProductContext';
 
 const Lamp = () => {
 
-  const { Watchlist, Cart, handlewatch, handlecart, productbuy, buying, categoryproduct, setcategoryproduct } = useContext(ProductContext);
+  const { Watchlist, Cart, handlewatch, handlecart, handleremove, productbuy, buying, categoryproduct, setcategoryproduct } = useContext(ProductContext);
   const [loading, setloading] = useState(true)
 
   useEffect(() => {
@@ -69,10 +69,16 @@ const Lamp = () => {
 
                   <div className="flex justify-between">
                     <button
-                      onClick={() => handlecart(prod)}
+                      onClick={() => {
+                        if (incart) {
+                          handleremove(prod);
+                        } else {
+                          handlecart(prod);
+                        }
+                      }}
                       className={`flex items-center gap-2 px-4 py-2 rounded-full transition duration-200 ${incart
-                          ? 'bg-gray-600 text-white'
-                          : 'bg-blue-500 hover:bg-blue-600 text-white'
+                        ? 'bg-gray-600 text-white'
+                        : 'bg-blue-500 hover:bg-blue-600 text-white'
                         }`}
                     >
                       <FaShoppingCart />

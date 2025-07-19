@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import {BrowserRouter, Routes, Route} from'react-router-dom'
 import Home from './pages/Home'
 import Product from './components/Product'
@@ -25,8 +25,17 @@ import Cart from './components/Cart'
 
 function App() {
   
-   
+//    const {User, Cart} = useContext(ProductContext)
 
+// useEffect(() => {
+//   if (User) {
+    
+//     const storedCart = localStorage.getItem("cart");
+//     if (storedCart) {     
+//       const Cart = JSON.parse(storedCart);
+//       }
+//   }
+// }, [User]);
 
 
   return (
